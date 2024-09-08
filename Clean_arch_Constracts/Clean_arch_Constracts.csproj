@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clean_arch_Constracts\Clean_arch_Constracts.csproj" />
+    <ProjectReference Include="..\clean_arch_Domain\clean_arch_Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,15 +7,19 @@
 using clean_arch_Domain.Orders;
 using clean_arch_Domain.Orders.Repository;
 
+using Clean_arch_Constracts;
+
 namespace CLean_arch_Application.Orders;
 
    public class OrderService : IOrderService
     {
         private readonly IOrderRepository _repository;
+         private readonly IsmsService _smsService;
 
-        public OrderService(IOrderRepository repository)
+        public OrderService(IOrderRepository repository,IsmsService service)
         {
             _repository = repository;
+        _smsService = service;
         }
 
 
@@ -32,6 +36,10 @@ namespace CLean_arch_Application.Orders;
             order.finaly();
             _repository.Update(order);
             _repository.SaveChanges();
+        _smsService.sendsms(new smsbody()
+        {
+            message ="test" , phoneNumber="09192323432"
+        });
         }
 
         public OrderDto GetOrderById(long id)
