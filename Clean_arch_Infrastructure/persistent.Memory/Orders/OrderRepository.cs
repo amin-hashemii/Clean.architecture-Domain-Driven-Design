@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Clean_arch_Infrastructure.persistent.Memory.Orders
 {
-    internal class OrderRepository : IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private Context _context;
         public OrderRepository(Context context)
