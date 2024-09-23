@@ -2,6 +2,7 @@
 using CLean_arch_Application.Products.DTOs;
 using clean_arch_Domain.Products;
 using clean_arch_Domain.Products.Repository;
+using clean_arch_Domain.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +22,14 @@ namespace CLean_arch_Application.Products
 
         public void AddProduct(AddProductDto command)
         {
-            _repository.Add(new Product(command.Title, command.Price));
+            _repository.Add(new Product(command.Title,Money.fromToman(command.Price)));
             _repository.Save();
         }
 
         public void EditProduct(EditProductDto command)
         {
             var product = _repository.GetById(command.Id);
-            product.Edit(command.Title,command.Price);
+            product.Edit(command.Title,Money.fromToman(command.Price));
 
             _repository.Update(product);
             _repository.Save();
@@ -39,7 +40,7 @@ namespace CLean_arch_Application.Products
             var product = _repository.GetById(Productid);
             return new ProductDto()
             {
-                Price = product.Price,
+                Price = product.Price.Value,
                 Id = Productid,
                 Title = product.Title
             };
@@ -49,7 +50,7 @@ namespace CLean_arch_Application.Products
         {
             return _repository.Getlist().Select(product => new ProductDto()
             {
-                Price = product.Price,
+                Price = product.Price.Value,
                 Id = product.Id,
                 Title = product.Title
             }).ToList();
