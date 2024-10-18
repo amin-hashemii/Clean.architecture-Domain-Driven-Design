@@ -1,6 +1,8 @@
 ﻿using CLean_arch_Application.Orders;
+using CLean_arch_Application.Orders.Services;
 using CLean_arch_Application.Products;
 using Clean_arch_Constracts;
+using clean_arch_Domain.OrderAgg.Service;
 using clean_arch_Domain.Orders.Repository;
 using clean_arch_Domain.Products.Repository;
 using Clean_arch_Infrastructure;
@@ -24,6 +26,7 @@ namespace Clean_arch_Config
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderDomainService, OrderDomainService>();
 
             services.AddScoped<IsmsService, SmsService>();
             services.AddSingleton<Context>();

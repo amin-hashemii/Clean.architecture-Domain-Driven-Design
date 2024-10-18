@@ -13,8 +13,8 @@ namespace clean_arch_Domain.Products.Repository
         void Add(Product product);
         void Update(Product product);
         void Remove (Product product);
-
         void Save();
+        bool IsProductExsist(Guid id);
 
     }
 }

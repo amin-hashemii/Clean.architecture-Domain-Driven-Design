@@ -1,4 +1,5 @@
 ﻿using clean_arch_Domain.OrderAgg;
+using clean_arch_Domain.OrderAgg.Service;
 using clean_arch_Domain.Shared;
 using System;
 using System.Collections.Generic;
@@ -26,18 +27,19 @@ namespace clean_arch_Domain.Orders
             Product_Id = product_id;
          
         }
-
-       
         public void finaly()
         {
             IsFinaly = true;
             FinlayDate = DateTime.Now;
         }
-        public void AddItem(Guid productid, int count, int price) 
+        public void AddItem(Guid productId, int count, int price,IOrderDomainService orderService) 
         {
-            if(Items.Any(p => p.ProductId == productid)) 
+            if (orderService.IsProductNotExsist(productId))
+                throw new Exception("TEST");
+
+            if(Items.Any(p => p.ProductId == productId)) 
                 return;
-            Items.Add(new OrderItem(Id,count,productid,Money.fromToman(price)));
+            Items.Add(new OrderItem(Id,count,productId,Money.fromToman(price)));
             TotalItem += count;
         }
         public void RemoveItem(Guid productId)

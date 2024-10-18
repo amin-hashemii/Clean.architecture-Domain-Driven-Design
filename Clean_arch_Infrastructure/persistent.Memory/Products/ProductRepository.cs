@@ -46,6 +46,9 @@ namespace Clean_arch_Infrastructure.persistent.Memory.Products
             //
         }
 
- 
+        public bool IsProductExsist(Guid id)
+        {
+           return _context.Products.Any(p => p.Id == id);
+        }
     }
 }
