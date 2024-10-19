@@ -1,4 +1,5 @@
-﻿using System;
+﻿using clean_arch_Domain.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace clean_arch_Domain.ProductAgg
 {
-    public class ProductImages
+    public class ProductImages:BaseEntity
     {
         public ProductImages(Guid productId, string imageName)
         {

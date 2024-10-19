@@ -1,4 +1,5 @@
 ﻿using clean_arch_Domain.OrderAgg;
+using clean_arch_Domain.OrderAgg.Events;
 using clean_arch_Domain.OrderAgg.Service;
 using clean_arch_Domain.Shared;
 using System;
@@ -9,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace clean_arch_Domain.Orders
 {
-    public class Order
+    public class Order :AggregateRoot
     {
-        public long Id { get; private set; }
-        public Guid Product_Id { get; private set; }
+        public long UserId { get; private set; }
+        //public Guid Product_Id { get; private set; }
        
         public int Totalprice ;
         public int TotalItem {  get; set; }
@@ -21,16 +22,17 @@ namespace clean_arch_Domain.Orders
 
         public ICollection<OrderItem> Items {  get; private set; }
 
-        public Order(Guid product_id)
+        public Order(long userid)
         {
-         
-            Product_Id = product_id;
+
+            UserId = userid;
          
         }
         public void finaly()
         {
             IsFinaly = true;
             FinlayDate = DateTime.Now;
+            AddDomainEvent(new OrderFinalized(Id,UserId));
         }
         public void AddItem(Guid productId, int count, int price,IOrderDomainService orderService) 
         {
